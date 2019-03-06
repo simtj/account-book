@@ -18,16 +18,13 @@
         `unit_price` = '$unit_price'
         where idx = '$idx'
      ";
-
      mysql_query($sql);
 
-     $sql = "insert into `closing_account` set  
-     `company` = '$company'
-     where idx = '$idx'
-  ";
-
-  mysql_query($sql);
+     $sql = "update `closing_account` set  
+     `unit_price` = '$unit_price'
+     where `company` = '$company'";
+     mysql_query($sql);
 
 
-    Header("Location:index.php"); 
+    alert_go_to("수정 되었습니다.", "index.php");
 ?>

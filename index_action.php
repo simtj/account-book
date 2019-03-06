@@ -3,6 +3,16 @@
 
     $company = $_POST['company'];
     
+    $sql = "select * from `account` where `company` = '$company'";
+    $result = mysql_query($sql);
+    $row = mysql_fetch_array($result);
+    
+
+    if ($company == $row['company']) {
+        alert_go_to("등록 되어 있는 업체 입니다.", "index.php");
+    }
+
+
     $sql = "insert into `account` set  
         `company` = '$company',
         `phone_number` = '$phone_number',
@@ -23,7 +33,7 @@
 
      $sql = "insert into `closing_account` set  
      `company` = '$company',
-     `unit_price` = '0',
+     `unit_price` = '$unit_price',
      `accounts_receivable` = '0',
      `sales` = '0',
      `supply_value` = '0',
@@ -36,6 +46,5 @@
 
   mysql_query($sql);
 
-
-    Header("Location:index.php"); 
+  alert_go_to("등록 되었습니다.", "index.php");
 ?>

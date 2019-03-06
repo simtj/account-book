@@ -1,7 +1,7 @@
 <?
     include_once "common.php";
 
-    $sql = "select * from closing_account order by idx desc";
+    $sql = "select * from `closing_account` order by idx desc";
     $result = mysql_query($sql);
     
 

@@ -106,6 +106,8 @@
                         
                             <form name="frm" action="update_action.php" method="post" enctyppe="multipart/form-data" >
                                 <input type="hidden" name="idx" value="<?=$row['idx']?>">
+                                <input type="hidden" name="company" value="<?=$row['company']?>">
+                                
                                 <div class="form-group">
                                     <label>업체명</label>
                                     <input class="form-control" name="company" value="<?=$row['company']?>" maxlength="100"disabled>
