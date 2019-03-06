@@ -8,6 +8,9 @@
                         <li>
                             <a href="closing_account.php"><i class="fa fa-dashboard fa-fw"></i> 결산 관리</a>
                         </li>                    
+                        <li>
+                            <a href="closing_account.php"><i class="fa fa-dashboard fa-fw"></i> 월별 입력</a>
+                        </li>                                            
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
