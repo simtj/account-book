@@ -29,7 +29,7 @@
         `unit_price` = '$unit_price'
      ";
 
-     mysql_query($sql);
+    mysql_query($sql);
 
      $sql = "insert into `closing_account` set  
      `company` = '$company',

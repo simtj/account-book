@@ -1,15 +1,12 @@
 <?
     include_once "common.php";
 
-/*
-    $sql = "select * from `closing_account` order by idx desc";
+    $sql = "select * from `wolbyeol` order by idx desc";
     $result = mysql_query($sql);
-    
 
     while ($row = mysql_fetch_array($result)) {
         $rows[] = $row;
     }
-*/    
 
 ?>
 <!DOCTYPE html>
@@ -118,6 +115,7 @@
                                         <col width="500">
                                         <col width="500">
                                         <col width="500">
+                                        <col width="500">
                                     </colgroup>
                                     <thead>
                                     <tr>
@@ -129,6 +127,7 @@
                                         <th>특식(금액)</th>
                                         <th>도시락합계</th>
                                         <th>총액(특식합계)</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -144,6 +143,7 @@
                                                 <td><?=$v['special']?></td>
                                                 <td><?=$v['total_conut']?></td>
                                                 <td><?=$v['total_price']?></td>
+                                                <td><button type="button" class="btn btn-info" onClick="update('<?=$v['idx']?>')">수정</button></td>                                                
                                             </tr>
                                         <? } ?>
                                     <? } ?>
@@ -259,6 +259,11 @@
                 $("[name='frm']").submit();
             })
         });
+
+
+        function update(idx) {
+            location.href = 'wolbyeol_update.php?idx='+idx;
+        }
     </script>
 
 </body>
