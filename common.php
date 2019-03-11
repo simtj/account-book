@@ -1,4 +1,5 @@
 <?
+
 extract($_REQUEST,EXTR_SKIP);
 
 $connect_db = mysql_connect('localhost','root','test0');

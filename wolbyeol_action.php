@@ -15,9 +15,11 @@
         if (!is_numeric($company)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); }
         $_company = get_company("idx", $company);        
 
-        $year = date("Y");
-        $month = date("n");
-        $day = date("j");
+
+        $year = empty($_POST['year']) ? date("Y") : $_POST['year'] ;
+        $month = empty($_POST['month']) ? date("n") : $_POST['month'] ;
+        $day = empty($_POST['day']) ? date("d") : $_POST['day'] ;
+
         $reg_date = date("Y-m-d h:i:s");
 
         $total_conut = $breakfast + $lunch + $dinner + $snack + $special;

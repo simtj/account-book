@@ -1,12 +1,22 @@
 <?
     include_once "common.php";
 
-    $sql = "select * from `wolbyeol` order by idx desc";
+    $year = empty($_GET['to_year']) ? date("Y") : $_GET['to_year'] ;
+    $month = empty($_GET['to_month']) ? date("n") : $_GET['to_month'] ;
+    $day = empty($_GET['to_day']) ? date("d") : $_GET['to_day'] ;
+
+    $where = "";
+    $where .= "and `year`=".$year." ";
+    $where .= "and `month`=".$month." ";
+
+   
+    $sql = "select * from `wolbyeol` where 1=1 ".$where." order by idx desc";
     $result = mysql_query($sql);
 
     while ($row = mysql_fetch_array($result)) {
         $rows[] = $row;
     }
+
 
 ?>
 <!DOCTYPE html>
@@ -95,7 +105,29 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
-    
+
+            <div class="row">
+                <form name="search_frm" action="wolbyeol_list.php" method="get">
+                    <div class="col-sm-5">
+                        <label>
+                            <select class="form-control input-sm" name="to_year" >
+                                <option value="2018" <? if ($year == "2018") { echo "selected"; } ?> >2018</option>
+                                <option value="2019" <? if ($year == "2019") { echo "selected"; } ?> >2019</option>
+                                <option value="2020" <? if ($year == "2020") { echo "selected"; } ?> ">2020</option>
+                            </select>
+                        </label>년
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                            <select class="form-control input-sm" name="to_month" >
+                                <? for ($i=1; $i< 13; $i++) { ?>
+                                <option value="<?=$i;?>" <? if ($month == $i) { echo "selected"; } ?>  ><?=$i;?></option>
+                                <? } ?>
+                            </select>
+                        </label>월                        
+                    </div>
+                </form>
+            </div>  
+
             <!-- /.row -->
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -172,6 +204,9 @@
                             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                 <form name="frm" action="wolbyeol_action.php" method="post" enctyppe="multipart/form-data" >
                                     <input type="hidden" name="mode" value="w">
+                                    <input type="hidden" name="year" value="<?=$year?>">
+                                    <input type="hidden" name="month" value="<?=$month?>">
+
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                         <div class="modal-header">
@@ -258,6 +293,15 @@
             $("[id='btn_save']").click(function() {
                 $("[name='frm']").submit();
             })
+
+            $("[name='to_year']").change(function() {
+                $("[name='search_frm']").submit();
+            })
+
+            $("[name='to_month']").change(function() {
+                $("[name='search_frm']").submit();
+            })            
+
         });
 
 
