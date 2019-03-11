@@ -37,6 +37,21 @@ function printr($arr) {
     return false;
 }
 
+function all_company() {
+    $sql = "select * from account order by idx desc";
+    $result = mysql_query($sql);
+    
+
+    while ($row = mysql_fetch_array($result)) {
+        if ($row) {
+            $rows[] = $row;
+        }
+    }
+
+    return $rows;
+}
+
+
 function get_company($field, $value) {
     $sql = "select * from `account` where `".$field."` = '".$value."'";
     $result = mysql_query($sql);

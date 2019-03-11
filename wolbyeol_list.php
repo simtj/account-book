@@ -9,15 +9,6 @@
     $where .= "and `year`=".$year." ";
     $where .= "and `month`=".$month." ";
 
-   
-    $sql = "select * from `wolbyeol` where 1=1 ".$where." order by idx desc";
-    $result = mysql_query($sql);
-
-    while ($row = mysql_fetch_array($result)) {
-        $rows[] = $row;
-    }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -163,103 +154,44 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
-                                    <? if (isset($rows))  { ?>
-                                        <? foreach ($rows as $k => $v) { ?>
+                                    <?  
+                                        foreach (all_company() as $k => $v) {   
+                                            $sql = "select * from `wolbyeol` where 1=1 and company_idx='".$v['idx']."' and company='".$v['company']."'".$where." order by idx desc";
+                                            $result = mysql_query($sql);
+                                            $row = mysql_fetch_array($result);
+                                            
+                                            if (isset($row['idx'])) {
+                                    ?>
                                             <tr>
                                                 <td><?=$v['company']?></td>
-                                                <td><?=$v['breakfast']?></td>
-                                                <td><?=$v['lunch']?></td>
-                                                <td><?=$v['dinner']?></td>
-                                                <td><?=$v['snack']?></td>
-                                                <td><?=$v['special']?></td>
-                                                <td><?=$v['total_conut']?></td>
-                                                <td><?=$v['total_price']?></td>
-                                                <td><button type="button" class="btn btn-info" onClick="update('<?=$v['idx']?>')">수정</button></td>                                                
+                                                <td><?=$row['breakfast']?></td>
+                                                <td><?=$row['lunch']?></td>
+                                                <td><?=$row['dinner']?></td>
+                                                <td><?=$row['snack']?></td>
+                                                <td><?=$row['special']?></td>
+                                                <td><?=$row['special_price']?></td>
+                                                <td><?=$row['total_price']?></td>
+                                                <td><button type="button" class="btn btn-info" onClick="_update('<?=$row['idx']?>')">수정</button></td>
                                             </tr>
-                                        <? } ?>
-                                    <? } ?>
+                                            <? } else { ?>
+                                                <tr>
+                                                <td><?=$v['company']?></td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td><button type="button" class="btn btn-info" onClick="_write('<?=$v['idx']?>')">수정</button></td>
+                                            </tr>                                            
+                                            <? } ?>
+                                    <?  }  ?>
                                     </tbody>
                                 </table>
                             </div>
                             <div id="paging_div"></div>
-
-                            <!-- Button trigger modal -->
-                            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="btn_modal">
-                            추가
-                            </button>
-
-                            <!-- Modal -->
-                            <?
-                                $sql_0 = "select * from account order by idx desc";
-                                $result_0 = mysql_query($sql_0);
-                            
-                                while ($row_0 = mysql_fetch_array($result_0)) {
-                                    if ($row_0) {
-                                        $rows_0[] = $row_0;
-                                    }
-                                }                           
-                            ?>
-
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                <form name="frm" action="wolbyeol_action.php" method="post" enctyppe="multipart/form-data" >
-                                    <input type="hidden" name="mode" value="w">
-                                    <input type="hidden" name="year" value="<?=$year?>">
-                                    <input type="hidden" name="month" value="<?=$month?>">
-
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="btn_exit">&times;</button>
-                                            <h4 class="modal-title" id="myModalLabel">월별입력</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group">
-                                                <label>업체명</label>
-                                                <select class="form-control" name="company" >
-                                                <? if (isset($rows_0))  { ?>
-                                                    <? foreach ($rows_0 as $k_0 => $v_0) { ?>
-                                                    <option value="<?=$v_0['idx']?>"><?=$v_0['company']?></option>
-                                                    <? } ?>
-                                                <? } ?>                                                    
-                                                </select>
-                                                <!--<input class="form-control" name="company" maxlength="100">-->
-                                            </div>
-                                            <div class="form-group">
-                                                <label>아침</label>
-                                                <input class="form-control" name="breakfast" maxlength="100">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>점심</label>
-                                                <input class="form-control" name="lunch" maxlength="100">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>저녁</label>
-                                                <input class="form-control" name="dinner" maxlength="100">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>야식</label>
-                                                <input class="form-control" name="snack" maxlength="100">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>특식</label>
-                                                <input class="form-control" name="special" maxlength="100">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>특식(금액)</label>
-                                                <input class="form-control" name="special_price" maxlength="100">
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_close">닫기</button>
-                                            <button type="button" class="btn btn-primary" id="btn_save">저장</button>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
+                   
                         </div>
                     </div>
                 </div>
@@ -304,8 +236,11 @@
 
         });
 
+        function _write(company_idx) {
+            location.href = 'wolbyeol_write.php?company_idx='+company_idx+'&to_year=<?=$year?>&to_month=<?=$month?>';
+        }
 
-        function update(idx) {
+        function _update(idx) {
             location.href = 'wolbyeol_update.php?idx='+idx;
         }
     </script>

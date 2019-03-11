@@ -12,8 +12,8 @@
 
     if ($mode == "w") {
 
-        if (!is_numeric($company)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); }
-        $_company = get_company("idx", $company);        
+        if (!is_numeric($company_idx)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); }
+        $_company = get_company("idx", $company_idx);        
 
 
         $year = empty($_POST['year']) ? date("Y") : $_POST['year'] ;
@@ -26,21 +26,21 @@
         $total_price = (($breakfast + $lunch + $dinner + $snack) * $_company['unit_price']) + ($special * $special_price);
 
         $sql = "insert into `wolbyeol` set 
-        `company_idx` = '".$_company['idx']."',
-        `company` = '".$_company['company']."',
-        `year` = '".$year."',
-        `month` = '".$month."',
-        `day` = '".$day."',
-        `unit_price` = '".$_company['unit_price']."',
-        `breakfast` = '".$breakfast."',
-        `lunch` = '".$lunch."',
-        `dinner` = '".$dinner."',
-        `snack` = '".$snack."',
-        `special` = '".$special."',
-        `special_price` = '".$special_price."',
-        `total_conut` = '".$total_conut."',
-        `total_price` = '".$total_price."',
-        `reg_date` = '".$reg_date."'
+            `company_idx` = '".$_company['idx']."',
+            `company` = '".$_company['company']."',
+            `year` = '".$year."',
+            `month` = '".$month."',
+            `day` = '".$day."',
+            `unit_price` = '".$_company['unit_price']."',
+            `breakfast` = '".$breakfast."',
+            `lunch` = '".$lunch."',
+            `dinner` = '".$dinner."',
+            `snack` = '".$snack."',
+            `special` = '".$special."',
+            `special_price` = '".$special_price."',
+            `total_conut` = '".$total_conut."',
+            `total_price` = '".$total_price."',
+            `reg_date` = '".$reg_date."'
         ";
 
         mysql_query($sql);
@@ -55,15 +55,15 @@
         $total_price = (($breakfast + $lunch + $dinner + $snack) * $_company['unit_price']) + ($special * $special_price);
  
         $sql = "update `wolbyeol` set  
-        `unit_price` = '".$_company['unit_price']."',
-        `breakfast` = '".$breakfast."',
-        `lunch` = '".$lunch."',
-        `dinner` = '".$dinner."',
-        `snack` = '".$snack."',
-        `special` = '".$special."',
-        `special_price` = '".$special_price."',
-        `total_conut` = '".$total_conut."',
-        `total_price` = '".$total_price."'
+            `unit_price` = '".$_company['unit_price']."',
+            `breakfast` = '".$breakfast."',
+            `lunch` = '".$lunch."',
+            `dinner` = '".$dinner."',
+            `snack` = '".$snack."',
+            `special` = '".$special."',
+            `special_price` = '".$special_price."',
+            `total_conut` = '".$total_conut."',
+            `total_price` = '".$total_price."'
         where idx = '$idx'
         ";
 
