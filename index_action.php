@@ -12,6 +12,8 @@
         alert_go_to("등록 되어 있는 업체 입니다.", "index.php");
     }
 
+    $reg_date = date("Y-m-d h:i:s");
+
     /* 거래처 등록 */
     $sql = "insert into `account` set  
         `company` = '$company',
@@ -26,7 +28,8 @@
         `email` = '$email',        
         `account_holder` = '$account_holder',        
         `expected_date` = '$expected_date',
-        `unit_price` = '$unit_price'
+        `unit_price` = '$unit_price',
+        `reg_date` = '".$reg_date."'
      ";
     mysql_query($sql);
 

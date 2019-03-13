@@ -2,17 +2,17 @@
     include_once "common.php";
 
 
-    if ($breakfast) { if (!is_numeric($breakfast)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); } }
-    if ($lunch) { if (!is_numeric($lunch)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); } }
-    if ($dinner) { if (!is_numeric($dinner)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); } }
-    if ($snack) { if (!is_numeric($snack)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); } }
-    if ($special) { if (!is_numeric($special)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); } }
-    if ($special_price) { if (!is_numeric($special_price)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); } }
+    if ($breakfast) { if (!is_numeric($breakfast)) { alert_go_to("숫자를 입력하세요.", "ilbyeol_list.php"); } }
+    if ($lunch) { if (!is_numeric($lunch)) { alert_go_to("숫자를 입력하세요.", "ilbyeol_list.php"); } }
+    if ($dinner) { if (!is_numeric($dinner)) { alert_go_to("숫자를 입력하세요.", "ilbyeol_list.php"); } }
+    if ($snack) { if (!is_numeric($snack)) { alert_go_to("숫자를 입력하세요.", "ilbyeol_list.php"); } }
+    if ($special) { if (!is_numeric($special)) { alert_go_to("숫자를 입력하세요.", "ilbyeol_list.php"); } }
+    if ($special_price) { if (!is_numeric($special_price)) { alert_go_to("숫자를 입력하세요.", "ilbyeol_list.php"); } }
     
 
     if ($mode == "w") {
 
-        if (!is_numeric($company_idx)) { alert_go_to("숫자를 입력하세요.", "wolbyeol_list.php"); }
+        if (!is_numeric($company_idx)) { alert_go_to("숫자를 입력하세요.", "ilbyeol_list.php"); }
         $_company = get_company("idx", $company_idx);        
 
 
@@ -25,7 +25,7 @@
         $total_conut = $breakfast + $lunch + $dinner + $snack + $special;
         $total_price = (($breakfast + $lunch + $dinner + $snack) * $_company['unit_price']) + ($special * $special_price);
 
-        $sql = "insert into `wolbyeol` set 
+        $sql = "insert into `ilbyeol` set 
             `company_idx` = '".$_company['idx']."',
             `company` = '".$_company['company']."',
             `year` = '".$year."',
@@ -45,7 +45,7 @@
 
         mysql_query($sql);
 
-        alert_go_to("등록 되었습니다.", "wolbyeol_list.php");
+        alert_go_to("등록 되었습니다.", "ilbyeol_list.php");
 
     } else if ($mode == "u") {
 
@@ -54,7 +54,7 @@
         $total_conut = $breakfast + $lunch + $dinner + $snack + $special;
         $total_price = (($breakfast + $lunch + $dinner + $snack) * $_company['unit_price']) + ($special * $special_price);
  
-        $sql = "update `wolbyeol` set  
+        $sql = "update `ilbyeol` set  
             `unit_price` = '".$_company['unit_price']."',
             `breakfast` = '".$breakfast."',
             `lunch` = '".$lunch."',
@@ -69,7 +69,7 @@
 
         mysql_query($sql);
 
-        alert_go_to("수정 되었습니다.", "wolbyeol_list.php");
+        alert_go_to("수정 되었습니다.", "ilbyeol_list.php");
 
     }
 

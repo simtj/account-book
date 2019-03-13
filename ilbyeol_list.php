@@ -1,20 +1,21 @@
-
 <?
     include_once "header.php";
 
     $year = empty($_GET['to_year']) ? date("Y") : $_GET['to_year'] ;
     $month = empty($_GET['to_month']) ? date("n") : $_GET['to_month'] ;
+    $day = empty($_GET['to_day']) ? date("d") : $_GET['to_day'] ;
 
     $where = "";
     $where .= "and `year`=".$year." ";
     $where .= "and `month`=".$month." ";
+    $where .= "and `day`=".$day." ";
 
     $all_company_where = $year."-".sprintf('%02d',$month)."-"."31 23:59:59";
     $all_company = all_company("reg_date", $all_company_where, "<=");
 
     if ($all_company) {
         foreach ($all_company as $k => $v) {
-            $sql = "select * from `wolbyeol` where 1=1 and company_idx='".$v['idx']."' and company='".$v['company']."'".$where." order by idx desc";
+            $sql = "select * from `ilbyeol` where 1=1 and company_idx='".$v['idx']."' and company='".$v['company']."'".$where." order by idx desc";
             $result = mysql_query($sql);
             $row = mysql_fetch_array($result);
 
@@ -28,6 +29,7 @@
                 $result_row[$k]['special'] = $row['special'];
                 $result_row[$k]['special_price'] = $row['special_price'];
                 $result_row[$k]['total_price'] = $row['total_price'];
+                $result_row[$k]['button'] = "<button type=\"button\" class=\"btn btn-info\" onClick=\"_update('".$row['idx']."')\">수정</button>";
             } else {
                 $result_row[$k]['idx'] = $v['idx'];
                 $result_row[$k]['company'] = $v['company'];
@@ -38,24 +40,24 @@
                 $result_row[$k]['special'] = "0";
                 $result_row[$k]['special_price'] = "0";
                 $result_row[$k]['total_price'] = "0";
+                $result_row[$k]['button'] = "<button type=\"button\" class=\"btn btn-info\" onClick=\"_write('".$v['idx']."')\">수정</button>";
             }
         }
-    }
+    }    
 
-    
 ?>
 
 
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> 월별 리스트 </h1>
+                    <h1 class="page-header"> 일별 리스트 </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
 
             <div class="row">
-                <form name="search_frm" action="wolbyeol_list.php" method="get">
+                <form name="search_frm" action="ilbyeol_list.php" method="get">
                     <div class="col-sm-5">
                         <label>
                             <select class="form-control input-sm" name="to_year" >
@@ -71,6 +73,14 @@
                                 <option value="<?=$i;?>" <? if ($month == $i) { echo "selected"; } ?>  ><?=$i;?></option>
                                 <? } ?>
                             </select>
+                        </label>월
+                        &nbsp;&nbsp;&nbsp;&nbsp;          
+                        <label>
+                            <select class="form-control input-sm" name="to_day" >
+                                <? for ($i=1; $i< 32; $i++) { ?>
+                                <option value="<?=$i;?>" <? if ($day == $i) { echo "selected"; } ?>  ><?=$i;?></option>
+                                <? } ?>
+                            </select>
                         </label>월                        
                     </div>
                 </form>
@@ -81,7 +91,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            월별 리스트
+                            일별 리스트
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -95,6 +105,7 @@
                                         <col width="500">
                                         <col width="500">
                                         <col width="500">
+                                        <col width="100">
                                     </colgroup>
                                     <thead>
                                     <tr>
@@ -106,6 +117,7 @@
                                         <th>특식(금액)</th>
                                         <th>도시락합계</th>
                                         <th>총액(특식합계)</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -120,6 +132,7 @@
                                                 <td><?=$v['special']?></td>
                                                 <td><?=$v['special_price']?></td>
                                                 <td><?=$v['total_price']?></td>
+                                                <td><?=$v['button']?></td>
                                             </tr>                                        
                                         <? } ?>
                                     <? } ?>
@@ -150,7 +163,18 @@
                 $("[name='search_frm']").submit();
             })            
 
+            $("[name='to_day']").change(function() {
+                $("[name='search_frm']").submit();
+            })
+
         });
 
+        function _write(company_idx) {
+            location.href = 'ilbyeol_write.php?company_idx='+company_idx+'&to_year=<?=$year?>&to_month=<?=$month?>&to_day=<?=$day?>';
+        }
+
+        function _update(idx) {
+            location.href = 'ilbyeol_update.php?idx='+idx;
+        }
     </script>
 <? include_once "footer.php"; ?>    

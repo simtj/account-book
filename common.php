@@ -37,8 +37,14 @@ function printr($arr) {
     return false;
 }
 
-function all_company() {
-    $sql = "select * from account order by idx desc";
+function all_company($field = "", $value = "", $inequality = "=") {
+    $where = "";
+
+    if ($field != "") {
+        $where = "and `".$field."` ".$inequality." '".$value."'";
+    }
+
+    $sql = "select * from account where 1=1 ".$where." order by idx desc";
     $result = mysql_query($sql);
     
 
@@ -47,8 +53,10 @@ function all_company() {
             $rows[] = $row;
         }
     }
-
-    return $rows;
+    
+    if (isset($rows)) {
+        return $rows;
+    }
 }
 
 

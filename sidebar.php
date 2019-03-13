@@ -7,10 +7,13 @@
                         </li>
                         <li>
                             <a href="closing_account.php"><i class="fa fa-dashboard fa-fw"></i> 결산 관리</a>
-                        </li>                    
+                        </li>
                         <li>
-                            <a href="wolbyeol_list.php"><i class="fa fa-dashboard fa-fw"></i> 월별 입력</a>
-                        </li>                                            
+                            <a href="wolbyeol_list.php"><i class="fa fa-dashboard fa-fw"></i> 월별 리스트</a>
+                        </li>
+                        <li>
+                            <a href="ilbyeol_list.php"><i class="fa fa-dashboard fa-fw"></i> 일별 리스트</a>
+                        </li>                        
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
