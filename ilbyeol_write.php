@@ -25,6 +25,7 @@
                                 <input type="hidden" name="company_idx" value="<?=$_company['idx']?>">
                                 <input type="hidden" name="year" value="<?=$to_year?>">
                                 <input type="hidden" name="month" value="<?=$to_month?>">
+                                <input type="hidden" name="day" value="<?=$to_day?>">
 
                                 <div class="form-group">
                                     <label>업체명</label>

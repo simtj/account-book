@@ -10,7 +10,7 @@
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header"> 월별 입력 </h1>
+                    <h1 class="page-header"> 일별 입력 </h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -20,7 +20,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            월별 입력
+                            일별 입력
                         </div>
                         <div class="panel-body">
                         
@@ -29,7 +29,9 @@
                                 <input type="hidden" name="idx" value="<?=$row['idx']?>">
                                 <input type="hidden" name="mode" value="u">
                                 <input type="hidden" name="company_idx" value="<?=$row['company_idx']?>">
-
+                                <input type="hidden" name="year" value="<?=$row['year']?>">
+                                <input type="hidden" name="month" value="<?=$row['month']?>">
+                                <input type="hidden" name="day" value="<?=$row['day']?>">
 
                                 <div class="form-group">
                                     <label>업체명</label>

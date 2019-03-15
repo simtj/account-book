@@ -24,7 +24,7 @@
 
         $total_conut = $breakfast + $lunch + $dinner + $snack + $special;
         $total_price = (($breakfast + $lunch + $dinner + $snack) * $_company['unit_price']) + ($special * $special_price);
-
+ 
         $sql = "insert into `ilbyeol` set 
             `company_idx` = '".$_company['idx']."',
             `company` = '".$_company['company']."',
@@ -42,10 +42,16 @@
             `total_price` = '".$total_price."',
             `reg_date` = '".$reg_date."'
         ";
-
         mysql_query($sql);
 
-        alert_go_to("등록 되었습니다.", "ilbyeol_list.php");
+        /** 월별 입력 */
+        set_wolbyeol($company_idx, $year, $month);
+
+        /** 결산 입력 */
+        set_gyeolsan($company_idx, $year, $month);
+
+
+        alert_go_to("수정 되었습니다.", "ilbyeol_list.php");
 
     } else if ($mode == "u") {
 
@@ -66,9 +72,14 @@
             `total_price` = '".$total_price."'
         where idx = '$idx'
         ";
-
         mysql_query($sql);
 
+        /** 월별 입력 */
+        set_wolbyeol($company_idx, $year, $month);
+
+        /** 결산 입력 */
+        set_gyeolsan($company_idx, $year, $month);
+        
         alert_go_to("수정 되었습니다.", "ilbyeol_list.php");
 
     }

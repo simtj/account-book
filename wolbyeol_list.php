@@ -1,4 +1,3 @@
-
 <?
     include_once "header.php";
 
@@ -13,14 +12,16 @@
     $all_company = all_company("reg_date", $all_company_where, "<=");
 
     if ($all_company) {
+
         foreach ($all_company as $k => $v) {
             $sql = "select * from `wolbyeol` where 1=1 and company_idx='".$v['idx']."' and company='".$v['company']."'".$where." order by idx desc";
             $result = mysql_query($sql);
             $row = mysql_fetch_array($result);
 
             if (isset($row['idx'])) {
-                $result_row[$k]['idx'] = $v['idx'];
+                $result_row[$k]['company_idx'] = $v['idx'];
                 $result_row[$k]['company'] = $v['company'];
+                $result_row[$k]['unit_price'] = $row['unit_price'];                
                 $result_row[$k]['breakfast'] = $row['breakfast'];
                 $result_row[$k]['lunch'] = $row['lunch'];
                 $result_row[$k]['dinner'] = $row['dinner'];
@@ -29,8 +30,9 @@
                 $result_row[$k]['special_price'] = $row['special_price'];
                 $result_row[$k]['total_price'] = $row['total_price'];
             } else {
-                $result_row[$k]['idx'] = $v['idx'];
+                $result_row[$k]['company_idx'] = $v['idx'];
                 $result_row[$k]['company'] = $v['company'];
+                $result_row[$k]['unit_price'] = "0";   
                 $result_row[$k]['breakfast'] = "0";
                 $result_row[$k]['lunch'] = "0";
                 $result_row[$k]['dinner'] = "0";
@@ -41,8 +43,7 @@
             }
         }
     }
-
-    
+ 
 ?>
 
 
@@ -112,7 +113,7 @@
                                     <? if (isset($result_row))  { ?>
                                         <? foreach ($result_row as $k => $v) { ?>
                                         <tr>
-                                                <td><?=$v['company']?></td>
+                                                <td><a href="wolbyeol_view.php?company_idx=<?=$v['company_idx']?>&year=<?=$year?>&month=<?=$month?>"><?=$v['company']?></a></td>
                                                 <td><?=$v['breakfast']?></td>
                                                 <td><?=$v['lunch']?></td>
                                                 <td><?=$v['dinner']?></td>
