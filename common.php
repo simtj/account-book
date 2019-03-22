@@ -1,9 +1,9 @@
-<?
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
+<?php
+//error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE);
 extract($_REQUEST,EXTR_SKIP);
 
-$connect_db = mysql_connect('localhost','root','test0');
-mysql_select_db('phptest',$connect_db);
+$connect_db = mysql_connect('aa1upliolz4efvr.cjrgj1si50gz.ap-northeast-2.rds.amazonaws.com','root','test1234');
+mysql_select_db('ebdb',$connect_db);
 mysql_query('SET NAMES UTF8');
 
 

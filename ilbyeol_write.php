@@ -1,4 +1,4 @@
-<?
+<?php
     include_once "header.php";
 
     $_company = get_company("idx", $company_idx); 
@@ -22,14 +22,14 @@
                         
                             <form name="frm" action="ilbyeol_action.php" method="post" enctyppe="multipart/form-data" >                             
                                 <input type="hidden" name="mode" value="w">
-                                <input type="hidden" name="company_idx" value="<?=$_company['idx']?>">
-                                <input type="hidden" name="year" value="<?=$to_year?>">
-                                <input type="hidden" name="month" value="<?=$to_month?>">
-                                <input type="hidden" name="day" value="<?=$to_day?>">
+                                <input type="hidden" name="company_idx" value="<?php echo $_company['idx']?>">
+                                <input type="hidden" name="year" value="<?php echo $to_year?>">
+                                <input type="hidden" name="month" value="<?php echo $to_month?>">
+                                <input type="hidden" name="day" value="<?php echo $to_day?>">
 
                                 <div class="form-group">
                                     <label>업체명</label>
-                                    <input class="form-control" name="company" value="<?=$_company['company']?>" maxlength="100" disabled>
+                                    <input class="form-control" name="company" value="<?php echo $_company['company']?>" maxlength="100" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>아침</label>
@@ -74,5 +74,5 @@
             })
         });
     </script>
-<? include_once "footer.php"; ?>    
+<?php include_once "footer.php"; ?>    
  

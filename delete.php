@@ -1,4 +1,4 @@
-<?
+<?php
     include_once "common.php";
 
     $sql = "select * from `account` where `idx` = '$idx'";

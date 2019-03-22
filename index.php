@@ -1,4 +1,4 @@
-<?
+<?php
     include_once "header.php";
 
     $sql = "select * from account order by idx desc";
@@ -65,29 +65,29 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <? if (isset($rows))  { ?>
-                                    <? foreach ($rows as $k => $v) { ?>
+                                    <?php if (isset($rows))  { ?>
+                                    <?php foreach ($rows as $k => $v) { ?>
                                         <tr>
-                                            <td><?=$v['company']?></td>
-                                            <td><?=$v['phone_number']?></td>
-                                            <td><?=$v['mutual']?></td>
-                                            <td><?=$v['registration_number']?></td>
-                                            <td><?=$v['ceo_name']?></td>
-                                            <td><?=$v['business_address']?></td>
-                                            <td><?=$v['business_conditions']?></td>
-                                            <td><?=$v['company_stock']?></td>
-                                            <td><?=$v['product']?></td>
-                                            <td><?=$v['email']?></td>
-                                            <td><?=$v['account_holder']?></td>
-                                            <td><?=$v['expected_date']?></td>
-                                            <td><?=$v['unit_price']?></td>
+                                            <td><?php echo $v['company']?></td>
+                                            <td><?php echo $v['phone_number']?></td>
+                                            <td><?php echo $v['mutual']?></td>
+                                            <td><?php echo $v['registration_number']?></td>
+                                            <td><?php echo $v['ceo_name']?></td>
+                                            <td><?php echo $v['business_address']?></td>
+                                            <td><?php echo $v['business_conditions']?></td>
+                                            <td><?php echo $v['company_stock']?></td>
+                                            <td><?php echo $v['product']?></td>
+                                            <td><?php echo $v['email']?></td>
+                                            <td><?php echo $v['account_holder']?></td>
+                                            <td><?php echo $v['expected_date']?></td>
+                                            <td><?php echo $v['unit_price']?></td>
                                             <td>
-                                                <button type="button" class="btn btn-info" onClick="update('<?=$v['idx']?>')">수정</button>
-                                                <button type="button" class="btn btn-danger" onClick="fdelete('<?=$v['idx']?>')">삭제</button>
+                                                <button type="button" class="btn btn-info" onClick="update('<?php echo $v['idx']?>')">수정</button>
+                                                <button type="button" class="btn btn-danger" onClick="fdelete('<?php echo $v['idx']?>')">삭제</button>
                                             </td>
                                         </tr>
-                                    <? } ?>
-                                    <? } ?>
+                                    <?php } ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -195,4 +195,4 @@
             location.href = 'delete.php?idx='+idx;
         }
         </script>
-<? include_once "footer.php"; ?>    
+<?php include_once "footer.php"; ?>    

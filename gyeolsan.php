@@ -1,4 +1,4 @@
-<?
+<?php
     include_once "header.php";
 
     $year = empty($_GET['to_year']) ? date("Y") : $_GET['to_year'] ;
@@ -60,17 +60,17 @@
                     <div class="col-sm-5">
                         <label>
                             <select class="form-control input-sm" name="to_year" >
-                                <option value="2018" <? if ($year == "2018") { echo "selected"; } ?> >2018</option>
-                                <option value="2019" <? if ($year == "2019") { echo "selected"; } ?> >2019</option>
-                                <option value="2020" <? if ($year == "2020") { echo "selected"; } ?> ">2020</option>
+                                <option value="2018" <?php if ($year == "2018") { echo "selected"; } ?> >2018</option>
+                                <option value="2019" <?php if ($year == "2019") { echo "selected"; } ?> >2019</option>
+                                <option value="2020" <?php if ($year == "2020") { echo "selected"; } ?> ">2020</option>
                             </select>
                         </label>년
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <label>
                             <select class="form-control input-sm" name="to_month" >
-                                <? for ($i=1; $i< 13; $i++) { ?>
-                                <option value="<?=$i;?>" <? if ($month == $i) { echo "selected"; } ?>  ><?=$i;?></option>
-                                <? } ?>
+                                <?php for ($i=1; $i< 13; $i++) { ?>
+                                <option value="<?php echo $i;?>" <?php if ($month == $i) { echo "selected"; } ?>  ><?php echo $i;?></option>
+                                <?php } ?>
                             </select>
                         </label>월                        
                     </div>
@@ -114,22 +114,22 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <? if (isset($result_row))  { ?>
-                                    <? foreach ($result_row as $k => $v) { ?>
+                                <?php if (isset($result_row))  { ?>
+                                    <?php foreach ($result_row as $k => $v) { ?>
                                         <tr>
-                                            <td><?=$v['company']?></td>
-                                            <td><?=$v['unit_price']?></td>
-                                            <td><?=$v['accounts_receivable']?></td>
-                                            <td><?=$v['sales']?></td>
-                                            <td><?=$v['supply_value']?></td>
-                                            <td><?=$v['tax_amount']?></td>
-                                            <td><?=$v['bill_amount']?></td>
-                                            <td><?=$v['accounts_alloy']?></td>
-                                            <td><?=$v['deposit']?></td>
-                                            <td><?=$v['deposit_date']?></td>                     
+                                            <td><?php echo $v['company']?></td>
+                                            <td><?php echo $v['unit_price']?></td>
+                                            <td><?php echo $v['accounts_receivable']?></td>
+                                            <td><?php echo $v['sales']?></td>
+                                            <td><?php echo $v['supply_value']?></td>
+                                            <td><?php echo $v['tax_amount']?></td>
+                                            <td><?php echo $v['bill_amount']?></td>
+                                            <td><?php echo $v['accounts_alloy']?></td>
+                                            <td><?php echo $v['deposit']?></td>
+                                            <td><?php echo $v['deposit_date']?></td>                     
                                         </tr>
-                                    <? } ?>
-                                <? } ?>
+                                    <?php } ?>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -159,4 +159,4 @@
         });
 
     </script>
-<? include_once "footer.php"; ?>
+<?php include_once "footer.php"; ?>

@@ -1,4 +1,4 @@
-<?
+<?php
     include_once "common.php";
 
     $company = $_POST['company'];

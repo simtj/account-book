@@ -1,5 +1,5 @@
 
-<?
+<?php
     include_once "header.php";
 
     $_company = all_company("idx", $company_idx);
@@ -51,7 +51,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <?=$_company[0]['company'];?>
+                            <?php echo $_company[0]['company'];?>
                         </div>
 
                         <div class="panel-body">
@@ -80,49 +80,49 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <? foreach ($result_row as $k => $v) { ?>
+                                        <?php foreach ($result_row as $k => $v) { ?>
                                         <tr>
-                                            <td><?=$v['day']?></td>
-                                            <td><?=$v['breakfast']?></td>
-                                            <td><?=$v['lunch']?></td>
-                                            <td><?=$v['dinner']?></td>
-                                            <td><?=$v['snack']?></td>
+                                            <td><?php echo $v['day']?></td>
+                                            <td><?php echo $v['breakfast']?></td>
+                                            <td><?php echo $v['lunch']?></td>
+                                            <td><?php echo $v['dinner']?></td>
+                                            <td><?php echo $v['snack']?></td>
                                             <td>
-                                                <?=$v['special']?>
-                                                <? if ($v['special']) { ?>
-                                                (<?=$v['special_price']?>)
-                                                <? } ?>
+                                                <?php echo $v['special']?>
+                                                <?php if ($v['special']) { ?>
+                                                (<?php echo $v['special_price']?>)
+                                                <?php } ?>
                                             </td>
                                             <td></td>
                                         </tr>
-                                        <? } ?>
+                                        <?php } ?>
                                         <tr>
                                             <td>수량</td>
-                                            <td><?=$result_total_row['total_breakfast']?></td>
-                                            <td><?=$result_total_row['total_lunch']?></td>
-                                            <td><?=$result_total_row['total_dinner']?></td>
-                                            <td><?=$result_total_row['total_snack']?></td>
-                                            <td><?=$result_total_row['total_special']?></td>
-                                            <td><?=$result_total_row['total_breakfast']+$result_total_row['total_lunch']+$result_total_row['total_dinner']+$result_total_row['total_snack']+$result_total_row['total_special']?></td>
+                                            <td><?php echo $result_total_row['total_breakfast']?></td>
+                                            <td><?php echo $result_total_row['total_lunch']?></td>
+                                            <td><?php echo $result_total_row['total_dinner']?></td>
+                                            <td><?php echo $result_total_row['total_snack']?></td>
+                                            <td><?php echo $result_total_row['total_special']?></td>
+                                            <td><?php echo $result_total_row['total_breakfast']+$result_total_row['total_lunch']+$result_total_row['total_dinner']+$result_total_row['total_snack']+$result_total_row['total_special']?></td>
                                         </tr>
                                         <tr>
                                             <td>단가</td>
-                                            <td><?=$_company[0]['unit_price']?></td>
-                                            <td><?=$_company[0]['unit_price']?></td>
-                                            <td><?=$_company[0]['unit_price']?></td>
-                                            <td><?=$_company[0]['unit_price']?></td>
+                                            <td><?php echo $_company[0]['unit_price']?></td>
+                                            <td><?php echo $_company[0]['unit_price']?></td>
+                                            <td><?php echo $_company[0]['unit_price']?></td>
+                                            <td><?php echo $_company[0]['unit_price']?></td>
                                             <td></td>
                                             <td></td>
                                         </tr>       
                                         <tr>
                                             <td>소계</td>
-                                            <td><?=$_company[0]['unit_price']*$result_total_row['total_breakfast']?></td>
-                                            <td><?=$_company[0]['unit_price']*$result_total_row['total_lunch']?></td>
-                                            <td><?=$_company[0]['unit_price']*$result_total_row['total_dinner']?></td>
-                                            <td><?=$_company[0]['unit_price']*$result_total_row['total_snack']?></td>
+                                            <td><?php echo $_company[0]['unit_price']*$result_total_row['total_breakfast']?></td>
+                                            <td><?php echo $_company[0]['unit_price']*$result_total_row['total_lunch']?></td>
+                                            <td><?php echo $_company[0]['unit_price']*$result_total_row['total_dinner']?></td>
+                                            <td><?php echo $_company[0]['unit_price']*$result_total_row['total_snack']?></td>
                                             <td></td>
                                             <td>
-                                            <?
+                                            <?php
                                                $_total = ($_company[0]['unit_price']*$result_total_row['total_breakfast'])+($_company[0]['unit_price']*$result_total_row['total_lunch'])+($_company[0]['unit_price']*$result_total_row['total_dinner'])+($_company[0]['unit_price']*$result_total_row['total_snack']);
                                                echo $_total;
                                             ?>
@@ -131,14 +131,14 @@
                                         <tr>
                                              <td>공급가액</td>
                                              <td colspan="6" >
-                                             <?
+                                             <?php
                                                 echo floor($_total/1.1);
                                              ?>
                                              </td>
                                         <tr>
                                         <tr>
                                              <td>부가세</td>
-                                             <td colspan="6" ><?=$_total-floor($_total/1.1)?></td>
+                                             <td colspan="6" ><?php echo $_total-floor($_total/1.1)?></td>
                                         <tr>
                                         <tr>
                                              <td>미수금</td>
@@ -146,7 +146,7 @@
                                         <tr>           
                                         <tr>
                                              <td>합계금액</td>
-                                             <td colspan="6" ><?=floor($_total/1.1)+($_total-floor($_total/1.1))?></td>
+                                             <td colspan="6" ><?php echo floor($_total/1.1)+($_total-floor($_total/1.1))?></td>
                                         <tr>             
                                         <tr>
                                              <td>계좌안내</td>
@@ -172,4 +172,4 @@
         });
 
     </script>
-<? include_once "footer.php"; ?>    
+<?php include_once "footer.php"; ?>    

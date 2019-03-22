@@ -1,4 +1,4 @@
-<?include_once "common.php";?>
+<?php include_once "common.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,6 +93,6 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <? include_once "sidebar.php"; ?>
+            <?php include_once "sidebar.php"; ?>
 
         </nav>

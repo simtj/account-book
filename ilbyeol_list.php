@@ -1,4 +1,4 @@
-<?
+<?php
     include_once "header.php";
 
     $year = empty($_GET['to_year']) ? date("Y") : $_GET['to_year'] ;
@@ -61,25 +61,25 @@
                     <div class="col-sm-5">
                         <label>
                             <select class="form-control input-sm" name="to_year" >
-                                <option value="2018" <? if ($year == "2018") { echo "selected"; } ?> >2018</option>
-                                <option value="2019" <? if ($year == "2019") { echo "selected"; } ?> >2019</option>
-                                <option value="2020" <? if ($year == "2020") { echo "selected"; } ?> ">2020</option>
+                                <option value="2018" <?php if ($year == "2018") { echo "selected"; } ?> >2018</option>
+                                <option value="2019" <?php if ($year == "2019") { echo "selected"; } ?> >2019</option>
+                                <option value="2020" <?php if ($year == "2020") { echo "selected"; } ?> ">2020</option>
                             </select>
                         </label>년
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <label>
                             <select class="form-control input-sm" name="to_month" >
-                                <? for ($i=1; $i< 13; $i++) { ?>
-                                <option value="<?=$i;?>" <? if ($month == $i) { echo "selected"; } ?>  ><?=$i;?></option>
-                                <? } ?>
+                                <?php for ($i=1; $i< 13; $i++) { ?>
+                                <option value="<?php echo $i;?>" <?php if ($month == $i) { echo "selected"; } ?>  ><?php echo  $i;?></option>
+                                <?php } ?>
                             </select>
                         </label>월
                         &nbsp;&nbsp;&nbsp;&nbsp;          
                         <label>
                             <select class="form-control input-sm" name="to_day" >
-                                <? for ($i=1; $i< 32; $i++) { ?>
-                                <option value="<?=$i;?>" <? if ($day == $i) { echo "selected"; } ?>  ><?=$i;?></option>
-                                <? } ?>
+                                <?php for ($i=1; $i< 32; $i++) { ?>
+                                <option value="<?php echo $i;?>" <?php if ($day == $i) { echo "selected"; } ?>  ><?php echo $i;?></option>
+                                <?php } ?>
                             </select>
                         </label>월                        
                     </div>
@@ -121,21 +121,21 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <? if (isset($result_row))  { ?>
-                                        <? foreach ($result_row as $k => $v) { ?>
+                                    <?php if (isset($result_row))  { ?>
+                                        <?php foreach ($result_row as $k => $v) { ?>
                                         <tr>
-                                                <td><?=$v['company']?></td>
-                                                <td><?=$v['breakfast']?></td>
-                                                <td><?=$v['lunch']?></td>
-                                                <td><?=$v['dinner']?></td>
-                                                <td><?=$v['snack']?></td>
-                                                <td><?=$v['special']?></td>
-                                                <td><?=$v['special_price']?></td>
-                                                <td><?=$v['total_price']?></td>
-                                                <td><?=$v['button']?></td>
+                                                <td><?php echo $v['company']?></td>
+                                                <td><?php echo $v['breakfast']?></td>
+                                                <td><?php echo $v['lunch']?></td>
+                                                <td><?php echo $v['dinner']?></td>
+                                                <td><?php echo $v['snack']?></td>
+                                                <td><?php echo $v['special']?></td>
+                                                <td><?php echo $v['special_price']?></td>
+                                                <td><?php echo $v['total_price']?></td>
+                                                <td><?php echo $v['button']?></td>
                                             </tr>                                        
-                                        <? } ?>
-                                    <? } ?>
+                                        <?php } ?>
+                                    <?php } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -170,11 +170,11 @@
         });
 
         function _write(company_idx) {
-            location.href = 'ilbyeol_write.php?company_idx='+company_idx+'&to_year=<?=$year?>&to_month=<?=$month?>&to_day=<?=$day?>';
+            location.href = 'ilbyeol_write.php?company_idx='+company_idx+'&to_year=<?php echo $year?>&to_month=<?php echo $month?>&to_day=<?php echo $day?>';
         }
 
         function _update(idx) {
             location.href = 'ilbyeol_update.php?idx='+idx;
         }
     </script>
-<? include_once "footer.php"; ?>    
+<?php include_once "footer.php"; ?>    

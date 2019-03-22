@@ -1,4 +1,4 @@
-<?
+<?php
     include_once "common.php";
 
     $sql = "select * from account where idx = '{$idx}' order by idx desc";
@@ -83,7 +83,7 @@
             </ul>
             <!-- /.navbar-top-links -->
 
-            <? include_once "sidebar.php"; ?>
+            <?php include_once "sidebar.php"; ?>
 
         </nav>
 
@@ -105,60 +105,60 @@
                         <div class="panel-body">
                         
                             <form name="frm" action="update_action.php" method="post" enctyppe="multipart/form-data" >
-                                <input type="hidden" name="idx" value="<?=$row['idx']?>">
-                                <input type="hidden" name="company" value="<?=$row['company']?>">
+                                <input type="hidden" name="idx" value="<?php echo $row['idx']?>">
+                                <input type="hidden" name="company" value="<?php echo $row['company']?>">
                                 
                                 <div class="form-group">
                                     <label>업체명</label>
-                                    <input class="form-control" name="company" value="<?=$row['company']?>" maxlength="100"disabled>
+                                    <input class="form-control" name="company" value="<?php echo $row['company']?>" maxlength="100"disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>전화번호</label>
-                                    <input class="form-control" name="phone_number" value="<?=$row['phone_number']?>" maxlength="100">
+                                    <input class="form-control" name="phone_number" value="<?php echo $row['phone_number']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>상호</label>
-                                    <input class="form-control" name="mutual" value="<?=$row['mutual']?>" maxlength="100">
+                                    <input class="form-control" name="mutual" value="<?php echo $row['mutual']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>등록번호</label>
-                                    <input class="form-control" name="registration_number" value="<?=$row['registration_number']?>" maxlength="100">
+                                    <input class="form-control" name="registration_number" value="<?php echo $row['registration_number']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>대표자성명</label>
-                                    <input class="form-control" name="ceo_name" value="<?=$row['ceo_name']?>" maxlength="100">
+                                    <input class="form-control" name="ceo_name" value="<?php echo $row['ceo_name']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>사업장주소</label>
-                                    <input class="form-control" name="business_address" value="<?=$row['business_address']?>" maxlength="100">
+                                    <input class="form-control" name="business_address" value="<?php echo $row['business_address']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>업태</label>
-                                    <input class="form-control" name="business_conditions" value="<?=$row['business_conditions']?>" maxlength="100">
+                                    <input class="form-control" name="business_conditions" value="<?php echo $row['business_conditions']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>중목</label>
-                                    <input class="form-control" name="company_stock" value="<?=$row['company_stock']?>" maxlength="100">
+                                    <input class="form-control" name="company_stock" value="<?php echo $row['company_stock']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>품명</label>
-                                    <input class="form-control" name="product" value="<?=$row['product']?>" maxlength="100">
+                                    <input class="form-control" name="product" value="<?php echo $row['product']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>메일주소</label>
-                                    <input class="form-control" name="email" value="<?=$row['email']?>" maxlength="100">
+                                    <input class="form-control" name="email" value="<?php echo $row['email']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>예금주</label>
-                                    <input class="form-control" name="account_holder" value="<?=$row['account_holder']?>" maxlength="100">
+                                    <input class="form-control" name="account_holder" value="<?php echo $row['account_holder']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>예상일</label>
-                                    <input class="form-control" name="expected_date" value="<?=$row['expected_date']?>" maxlength="100">
+                                    <input class="form-control" name="expected_date" value="<?php echo $row['expected_date']?>" maxlength="100">
                                 </div>
                                 <div class="form-group">
                                     <label>단가</label>
-                                    <input class="form-control" name="unit_price" value="<?=$row['unit_price']?>" maxlength="100">
+                                    <input class="form-control" name="unit_price" value="<?php echo $row['unit_price']?>" maxlength="100">
                                 </div>                                    
                                 
                                 <button type="button" class="btn btn-primary" id="btn_save">수정</button>
