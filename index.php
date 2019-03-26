@@ -2,15 +2,13 @@
     include_once "header.php";
 
     $sql = "select * from account order by idx desc";
-    $result = mysql_query($sql);
-    
+    $stmt = $connection->query($sql);
 
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         if ($row) {
             $rows[] = $row;
         }
     }
-    
 ?>
         <div id="page-wrapper">
             <div class="row">

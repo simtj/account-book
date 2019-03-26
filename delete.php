@@ -1,18 +1,21 @@
 <?php
     include_once "common.php";
 
-    $sql = "select * from `account` where `idx` = '$idx'";
-    $result = mysql_query($sql);
-    $row = mysql_fetch_array($result);
-   
+    $query = "select * from account where idx = :idx order by idx desc";
+    $stmt = $connection->prepare($query);
+    $stmt->execute([
+        ':idx' => $idx
+    ]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
     $company = $row['company'];
 
 
-    $sql = "delete from `account` where company = '$company'";
-    mysql_query($sql);
+    $sql = "delete from `account` where company = :company";
+    $stmt = $connection->prepare($sql);
+    $stmt->execute([
+        ':company' => $company
+    ]);
 
-    $sql = "delete from `closing_account` where company = '$company'";
-    mysql_query($sql);    
-    
     alert_go_to("삭제 되었습니다.", "index.php");
 ?>

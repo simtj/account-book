@@ -12,7 +12,7 @@
                             <a href="wolbyeol_list.php"><i class="fa fa-dashboard fa-fw"></i> 월별 리스트</a>
                         </li>
                         <li>
-                            <a href="ilbyeol_list.php"><i class="fa fa-dashboard fa-fw"></i> 일별 리스트</a>
+                            <a href="ilbyeol_list.php"><i class="fa fa-dashboard fa-fw"></i> 일별 입력 리스트</a>
                         </li>                        
                     </ul>
                 </div>

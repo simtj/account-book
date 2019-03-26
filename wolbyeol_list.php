@@ -5,8 +5,8 @@
     $month = empty($_GET['to_month']) ? date("n") : $_GET['to_month'] ;
 
     $where = "";
-    $where .= "and `year`=".$year." ";
-    $where .= "and `month`=".$month." ";
+    $where .= " and `year`= :year ";
+    $where .= " and `month`= :month ";
 
     $all_company_where = $year."-".sprintf('%02d',$month)."-"."31 23:59:59";
     $all_company = all_company("reg_date", $all_company_where, "<=");
@@ -14,9 +14,15 @@
     if ($all_company) {
 
         foreach ($all_company as $k => $v) {
-            $sql = "select * from `wolbyeol` where 1=1 and company_idx='".$v['idx']."' and company='".$v['company']."'".$where." order by idx desc";
-            $result = mysql_query($sql);
-            $row = mysql_fetch_array($result);
+            $sql = "select * from `wolbyeol` where 1=1 and company_idx = :company_idx and company = :company".$where." order by idx desc";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([
+                ':company_idx' => $v['idx'],
+                ':company' => $v['company'],
+                ':year' => $year,
+                ':month' => $month
+            ]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (isset($row['idx'])) {
                 $result_row[$k]['company_idx'] = $v['idx'];
@@ -45,8 +51,6 @@
     }
  
 ?>
-
-
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
@@ -113,15 +117,15 @@
                                     <?php if (isset($result_row))  { ?>
                                         <?php foreach ($result_row as $k => $v) { ?>
                                         <tr>
-                                                <td><a href="wolbyeol_view.php?company_idx=<?php echo $v['company_idx']?>&year=<?php echo $year?>&month=<?php echo $month?>"><?php echo $v['company']?></a></td>
-                                                <td><?php echo $v['breakfast']?></td>
-                                                <td><?php echo $v['lunch']?></td>
-                                                <td><?php echo $v['dinner']?></td>
-                                                <td><?php echo $v['snack']?></td>
-                                                <td><?php echo $v['special']?></td>
-                                                <td><?php echo $v['special_price']?></td>
-                                                <td><?php echo $v['total_price']?></td>
-                                            </tr>                                        
+                                            <td><a href="wolbyeol_view.php?company_idx=<?php echo $v['company_idx']?>&year=<?php echo $year?>&month=<?php echo $month?>"><?php echo $v['company']?></a></td>
+                                            <td><?php echo $v['breakfast']?></td>
+                                            <td><?php echo $v['lunch']?></td>
+                                            <td><?php echo $v['dinner']?></td>
+                                            <td><?php echo $v['snack']?></td>
+                                            <td><?php echo $v['special']?></td>
+                                            <td><?php echo $v['special_price']?></td>
+                                            <td><?php echo $v['total_price']?></td>
+                                        </tr>                                        
                                         <?php } ?>
                                     <?php } ?>
                                     </tbody>

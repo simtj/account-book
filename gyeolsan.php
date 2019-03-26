@@ -5,8 +5,8 @@
     $month = empty($_GET['to_month']) ? date("n") : $_GET['to_month'] ;
 
     $where = "";
-    $where .= " and `year`='".$year."' ";
-    $where .= " and `month`='".$month."' ";
+    $where .= " and `year`= :year ";
+    $where .= " and `month`= :month ";
 
     $all_company_where = $year."-".sprintf('%02d',$month)."-"."31 23:59:59";
     $all_company = all_company("reg_date", $all_company_where, "<=");
@@ -14,9 +14,15 @@
     if ($all_company) {
 
         foreach ($all_company as $k => $v) {
-            $sql = "select * from `gyeolsan` where 1=1 and company_idx='".$v['idx']."' and company='".$v['company']."'".$where." order by idx desc";
-            $result = mysql_query($sql);
-            $row = mysql_fetch_array($result);
+            $sql = "select * from `gyeolsan` where 1=1 and company_idx = :company_idx and company = :company".$where." order by idx desc";
+            $stmt = $connection->prepare($sql);
+            $stmt->execute([
+                ':company_idx' => $v['idx'],
+                ':company' => $v['company'],
+                ':year' => $year,
+                ':month' => $month
+            ]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if (isset($row['idx'])) {
                 $result_row[$k]['company_idx'] = $v['idx'];

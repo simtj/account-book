@@ -1,12 +1,13 @@
 <?php
     include_once "common.php";
 
-    $sql = "select * from account where idx = '{$idx}' order by idx desc";
-    $result = mysql_query($sql);
+    $query = "select * from account where idx = :idx order by idx desc";
+    $stmt = $connection->prepare($query);
+    $stmt->execute([
+        ':idx' => $idx
+    ]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
-
-    $row = mysql_fetch_array($result);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

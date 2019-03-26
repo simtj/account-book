@@ -4,10 +4,24 @@
 
     $_company = all_company("idx", $company_idx);
 
+
+    $result_total_row['total_breakfast'] = 0;
+    $result_total_row['total_lunch'] = 0;
+    $result_total_row['total_dinner'] = 0;
+    $result_total_row['total_snack'] = 0;
+    $result_total_row['total_special'] = 0;
+    $result_total_row['total_special_price'] = 0;
+
     for ($i=1; $i<32; $i++) {
-        $sql = "select * from `ilbyeol` where company_idx='".$company_idx."' and year='".$year."' and month='".$month."' and day='".$i."' ";
-        $result = mysql_query($sql);
-        $row = mysql_fetch_array($result);
+        $sql = "select * from `ilbyeol` where company_idx = :company_idx and year = :year and month = :month and day = :day";
+        $stmt = $connection->prepare($sql);
+        $stmt->execute([
+            ':company_idx' => $company_idx,
+            ':year' => $year,
+            ':month' => $month,
+            ':day' => $i
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (is_array($row)) {
             $result_row[$i]['day'] = $i;
@@ -26,6 +40,7 @@
             if ($row['special_price']) $result_total_row['total_special_price'] += $row['special_price'];
 
         } else {
+            
             $result_row[$i]['day'] = $i;
             $result_row[$i]['breakfast'] = "";
             $result_row[$i]['lunch'] = "";
@@ -33,6 +48,9 @@
             $result_row[$i]['snack'] = "";
             $result_row[$i]['special'] = "";
             $result_row[$i]['special_price'] = "";
+
+
+
         }
     }
 ?>
